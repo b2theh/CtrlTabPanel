@@ -4,10 +4,19 @@
   "author": "b2theh",
   "name": "CtrlTab Panel — Arc Style",
   "description": "A calm Arc-inspired Ctrl+Tab panel with rounded previews, subtle lavender selection, and light and dark appearances.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "readme": "https://github.com/b2theh/CtrlTabPanel/blob/main/README.md",
   "createdAt": "2026-10-30",
-  "updatedAt": "2026-10-30",
+  "updatedAt": "2026-10-30T11:43:27Z",
+  "preferences": "preferences.json",
+  "js": true,
+  "scripts": {
+    "size.uc.js": {
+      "name": "CtrlTab Panel Size",
+      "description": "Keep the native CtrlTab panel centered at the selected size",
+      "include": ["chrome://browser/content/browser.xhtml"]
+    }
+  },
   "style": {
     "chrome": "chrome.css"
   },

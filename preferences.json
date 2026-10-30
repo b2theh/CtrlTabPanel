@@ -1,0 +1,16 @@
+[
+  {
+    "type": "dropdown",
+    "property": "zen.mods.arc-ctrltab.size",
+    "label": "Panel size / Размер панели",
+    "defaultValue": "100",
+    "placeholder": false,
+    "options": [
+      { "label": "65% — Очень компактный", "value": "65" },
+      { "label": "80% — Компактный", "value": "80" },
+      { "label": "100% — Обычный", "value": "100" },
+      { "label": "115% — Крупный", "value": "115" },
+      { "label": "130% — Очень крупный", "value": "130" }
+    ]
+  }
+]

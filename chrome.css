@@ -1,5 +1,5 @@
 /* CtrlTab Panel — Arc-inspired styling for Zen.
- * Independent implementation; native switching and thumbnail generation stay in Zen.
+ * Native switching and thumbnail generation stay in Zen.
  * Adjust the variables below to customize the appearance.
  */
 @-moz-document url("chrome://browser/content/browser.xhtml") {
@@ -34,7 +34,7 @@
   }
 
   #ctrlTab-panel #ctrlTab-previews {
-    /* Keep Zen's column count, inline panel width and screen positioning.
+    /* Keep Zen's column count and inline panel width.
        This also supports its optional multi-row layout (up to 49 previews). */
     gap: var(--arc-ct-gap) !important;
     padding: 0 !important;
