@@ -1,0 +1,16 @@
+{
+  "id": "arc-ctrltab-panel",
+  "homepage": "https://github.com/b2theh/CtrlTabPanel",
+  "author": "b2theh",
+  "name": "CtrlTab Panel — Arc Style",
+  "description": "A calm Arc-inspired Ctrl+Tab panel with rounded previews, subtle lavender selection, and light and dark appearances.",
+  "version": "1.0.0",
+  "readme": "https://github.com/b2theh/CtrlTabPanel/blob/main/README.md",
+  "createdAt": "2026-10-30",
+  "updatedAt": "2026-10-30",
+  "style": {
+    "chrome": "chrome.css"
+  },
+  "tags": ["Tabs", "Minimal", "Arc"],
+  "fork": ["zen"]
+}

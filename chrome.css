@@ -1,0 +1,195 @@
+/* CtrlTab Panel — Arc-inspired styling for Zen.
+ * Independent implementation; native switching and thumbnail generation stay in Zen.
+ * Adjust the variables below to customize the appearance.
+ */
+@-moz-document url("chrome://browser/content/browser.xhtml") {
+  #ctrlTab-panel {
+    --arc-ct-radius: 22px;
+    --arc-ct-card-radius: 14px;
+    --arc-ct-padding: 16px;
+    --arc-ct-gap: 8px;
+    --arc-ct-surface: light-dark(#f5f3f1, #252426);
+    --arc-ct-text: light-dark(#29272c, #f4f1f6);
+    --arc-ct-muted: light-dark(#67616c, #b4aeba);
+    --arc-ct-line: light-dark(rgb(50 35 65 / 0.12), rgb(255 255 255 / 0.12));
+    --arc-ct-accent: light-dark(#6b50b6, #c6b2ff);
+    --arc-ct-selected: light-dark(#e8e1f2, #42394f);
+    --arc-ct-hover: light-dark(rgb(60 40 80 / 0.05), rgb(255 255 255 / 0.05));
+
+    /* Current Gecko tokens, with aliases for older Zen panel implementations. */
+    --panel-background-color: var(--arc-ct-surface) !important;
+    --panel-background: var(--arc-ct-surface) !important;
+    --panel-text-color: var(--arc-ct-text) !important;
+    --panel-color: var(--arc-ct-text) !important;
+    --panel-border-color: var(--arc-ct-line) !important;
+    --panel-border-radius: var(--arc-ct-radius) !important;
+    --panel-padding: var(--arc-ct-padding) !important;
+    --panel-shadow: 0 12px 32px rgb(0 0 0 / 0.22) !important;
+    --panel-shadow-margin: 24px !important;
+    color: var(--arc-ct-text) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+    text-shadow: none !important;
+  }
+
+  #ctrlTab-panel #ctrlTab-previews {
+    /* Keep Zen's column count, inline panel width and screen positioning.
+       This also supports its optional multi-row layout (up to 49 previews). */
+    gap: var(--arc-ct-gap) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-preview {
+    appearance: none !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: var(--arc-ct-card-radius) !important;
+    background: transparent !important;
+    color: inherit !important;
+    text-shadow: none !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-preview-inner {
+    display: grid !important;
+    grid-template-columns: 20px minmax(0, 1fr) !important;
+    grid-template-rows: auto 22px !important;
+    align-items: center !important;
+    gap: 10px 8px !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 9px !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--arc-ct-card-radius) !important;
+    background: transparent !important;
+    text-shadow: none !important;
+    transition: background-color 100ms ease, border-color 100ms ease !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-canvas {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 0 1px var(--arc-ct-line), 0 2px 5px rgb(0 0 0 / 0.08) !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-canvas > :is(img, canvas) {
+    /* Zen sets pixel sizes inline; let thumbnails follow their grid cell. */
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    border-radius: inherit !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-favicon-container {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    position: static !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-favicon {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    object-fit: contain !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-favicon:not([src]) {
+    list-style-image: url("chrome://global/skin/icons/defaultFavicon.svg") !important;
+    -moz-context-properties: fill !important;
+    fill: currentColor !important;
+    color: var(--arc-ct-muted) !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-label {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 22px !important;
+    text-align: start !important;
+    color: inherit !important;
+    text-shadow: none !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-preview:hover > .ctrlTab-preview-inner {
+    background: var(--arc-ct-hover) !important;
+  }
+
+  #ctrlTab-panel .ctrlTab-preview:focus > .ctrlTab-preview-inner {
+    background: var(--arc-ct-selected) !important;
+    border-color: var(--arc-ct-accent) !important;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.07) !important;
+  }
+
+  #ctrlTab-panel #ctrlTab-showAll-container {
+    padding: 12px 0 0 !important;
+  }
+
+  #ctrlTab-panel #ctrlTab-showAll-container:not(:has(#ctrlTab-showAll:not([hidden]))) {
+    display: none !important;
+  }
+
+  #ctrlTab-panel #ctrlTab-showAll {
+    appearance: none !important;
+    margin: 0 !important;
+    padding: 6px 14px !important;
+    border: 1px solid transparent !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    color: var(--arc-ct-muted) !important;
+    font: inherit !important;
+    font-size: 11px !important;
+    text-shadow: none !important;
+  }
+
+  #ctrlTab-panel #ctrlTab-showAll:is(:hover, :focus) {
+    background: var(--arc-ct-hover) !important;
+    color: var(--arc-ct-text) !important;
+  }
+
+  #ctrlTab-panel #ctrlTab-showAll:focus {
+    border-color: var(--arc-ct-accent) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #ctrlTab-panel .ctrlTab-preview-inner {
+      transition: none !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    #ctrlTab-panel {
+      --arc-ct-surface: Canvas;
+      --arc-ct-text: CanvasText;
+      --arc-ct-muted: CanvasText;
+      --arc-ct-line: CanvasText;
+      --arc-ct-accent: Highlight;
+      --arc-ct-selected: Canvas;
+      --arc-ct-hover: Canvas;
+    }
+  }
+}
